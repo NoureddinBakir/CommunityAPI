@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 const CONNECTION_URI = process.env.DB_CONNECTION || 'mongodb://localhost';
+const PORT = process.env.PORT || 3000;
 
 // JSON parser
 app.use(express.urlencoded({ extended : true}));
@@ -24,4 +25,4 @@ mongoose.connect(CONNECTION_URI)
 
 
 //start listening
-app.listen(3000);
+app.listen(PORT);
