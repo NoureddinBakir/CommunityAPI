@@ -5,7 +5,7 @@ const verify = require('./verifyToken');
 
 //Get back all posts
 router.get('/', async (req, res) => {
-    console.log('we r here ');
+    console.log('Github we r here ');
     try{
         const posts = await Posts.find().limit(5);
         res.send(posts);
