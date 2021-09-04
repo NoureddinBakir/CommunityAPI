@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
+const CONNECTION_URI = process.env.DB_CONNECTION || 'mongodb://localhost';
 
 // JSON parser
 app.use(express.urlencoded({ extended : true}));
@@ -16,9 +17,8 @@ const authRoute = require('./routes/auth');
 app.use('/', postRoute);
 app.use('/api/user', authRoute);
 
-
 //Connect database
-mongoose.connect(process.env.DB_CONNECTION)
+mongoose.connect(CONNECTION_URI)
         .then(()=>{console.log('Connected to database')})
         .catch(err => console.log(err + "_Error not connected"));
 
