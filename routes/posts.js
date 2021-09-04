@@ -4,10 +4,11 @@ const Posts = require('../models/posts');
 const verify = require('./verifyToken');
 
 //Get back all posts
-router.get('/', verify, async (req, res) => {
+router.get('/', async (req, res) => {
+    console.log('we r here ');
     try{
         const posts = await Posts.find().limit(5);
-        res.send(req.user);
+        res.send(posts);
     }catch(err){
         res.json({message: err});
     }
