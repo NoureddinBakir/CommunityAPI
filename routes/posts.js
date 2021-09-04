@@ -3,7 +3,7 @@ const router = express.Router();
 const Posts = require('../models/posts');
 const verify = require('./verifyToken');
 
-//Get back all postss
+//Get back all posts
 router.get('/', verify, async (req, res) => {
     try{
         const posts = await Posts.find().limit(5);
