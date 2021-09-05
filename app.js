@@ -4,11 +4,13 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 const CONNECTION_URI = process.env.DB_CONNECTION || 'mongodb://localhost';
+const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 
 // JSON parser
 app.use(express.urlencoded({ extended : true}));
 app.use(express.json());
+app.use(cors);
 
 //Import Routes
 const postRoute = require('./routes/posts');
