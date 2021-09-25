@@ -18,7 +18,7 @@ const contactRoute = require('./routes/contacts');
 const authRoute = require('./routes/auth');
 
 //Middlewares, functions that run when specific routes are hit
-app.use('/:communityId', communityRoute);
+app.use('/', communityRoute);
 app.use('/contacts', contactRoute);
 app.use('/auth', authRoute);
 

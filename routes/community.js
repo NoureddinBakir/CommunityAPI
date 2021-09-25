@@ -9,7 +9,7 @@ const Contacts = require('../models/contacts');
 const verify = require('./verifyToken');
 
 //Get back notifications from latest to oldest
-router.get('/notifications', verify,  async (req, res) => {
+router.get('/:communityId/notifications', verify,  async (req, res) => {
     try {
         const notifications = await Notifications.find().sort({_id:-1});
         res.json(notifications);
@@ -18,7 +18,7 @@ router.get('/notifications', verify,  async (req, res) => {
     }
 })
 //Post a notifications notification
-router.post('/notifications', verify, async (req, res) => {
+router.post('/:communityId/notifications', verify, async (req, res) => {
     const notification = new Notifications({
         created: req.body.created,
         start: req.body.start,
@@ -43,7 +43,7 @@ router.post('/notifications', verify, async (req, res) => {
 
 
 //Get latest events
-router.get('/events', verify,  async (req, res) => {
+router.get('/:communityId/events', verify,  async (req, res) => {
     try {
         const events = await Events.find().sort({_id:-1});
         res.json(events);
@@ -52,7 +52,7 @@ router.get('/events', verify,  async (req, res) => {
     }
 })
 //Post a events notification
-router.post('/events', verify, async (req, res) => {
+router.post('/:communityId/events', verify, async (req, res) => {
     const event = new Events({
         created: req.body.created,
         start: req.body.start,
@@ -77,7 +77,7 @@ router.post('/events', verify, async (req, res) => {
 
 
 //Get latest group
-router.get('/groups', verify,  async (req, res) => {
+router.get('/:communityId/groups', verify,  async (req, res) => {
     try {
         const groups = await Group.find(req.body.groupId);
         res.json(groups);
@@ -86,7 +86,7 @@ router.get('/groups', verify,  async (req, res) => {
     }
 })
 // Post a events group !! we need a modify function
-router.post('/groups', verify, async (req, res) => {
+router.post('/:communityId/groups', verify, async (req, res) => {
     const groups = new Groups({
         communityId: req.body.communityId,
         groupName: req.body.groupName,
@@ -108,7 +108,7 @@ router.post('/groups', verify, async (req, res) => {
 
 
 //Get latest customGroups by _id
-router.get('/customGroups', verify,  async (req, res) => {
+router.get('/:communityId/customGroups', verify,  async (req, res) => {
     try {
         const customGroups = await CustomGroups.find(req.body.groupId);
         res.json(customGroups);
@@ -117,7 +117,7 @@ router.get('/customGroups', verify,  async (req, res) => {
     }
 })
 // Post a events customGroups !! we need a modify function
-router.post('/customGroups', verify, async (req, res) => {
+router.post('/:communityId/customGroups', verify, async (req, res) => {
     const customGroups = new CustomGroups({
         communityId: req.body.communityId,
         groupName: req.body.groupName,
@@ -139,7 +139,7 @@ router.post('/customGroups', verify, async (req, res) => {
 
 
 //Get community by communityName
-router.get('/community', verify,  async (req, res) => {
+router.get('/:communityId/community', verify,  async (req, res) => {
     try {
         const community = await Communities.find(req.body.groupName);
         res.json(community);
@@ -148,7 +148,7 @@ router.get('/community', verify,  async (req, res) => {
     }
 })
 // Post a events community !! we need a modify function
-router.post('/community', verify, async (req, res) => {
+router.post('/:communityId/community', verify, async (req, res) => {
     const community = new Communities({
         communityName: req.body.communityName,
         info: {
