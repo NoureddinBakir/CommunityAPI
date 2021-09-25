@@ -11,7 +11,8 @@ const verify = require('./verifyToken');
 //Get back notifications from latest to oldest
 router.get('/:communityId/notifications', verify,  async (req, res) => {
     try {
-        const notifications = await Notifications.find().sort({_id:-1});
+        const community = await Communities.findOne({communityId: req.header.communityId});
+        const notifications = await Notifications.find({communityId: community._id}).sort({_id:-1});
         res.json(notifications);
     } catch (err) {
         res.json({message: err});  
