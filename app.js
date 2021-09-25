@@ -13,16 +13,18 @@ app.use(express.json());
 app.use(cors({origin: "*"}));
 
 //Import Routes
-const postRoute = require('./routes/posts');
+const communityRoute = require('./routes/community');
+const contactRoute = require('./routes/contacts');
 const authRoute = require('./routes/auth');
 
 //Middlewares, functions that run when specific routes are hit
-app.use('/', postRoute);
-app.use('/api/user', authRoute);
+app.use('/:communityId', communityRoute);
+app.use('/contacts', contactRoute);
+app.use('/auth', authRoute);
 
 //Connect database
 mongoose.connect(CONNECTION_URI)
-        .then(()=>{console.log('Connected to database')})
+        .then((conn)=>{console.log(`Connection Successful`)})
         .catch(err => console.log(err + "_Error not connected"));
 
 
